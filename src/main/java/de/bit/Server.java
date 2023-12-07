@@ -10,22 +10,18 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class Server {
-    private final int port;
-    private final int backlog;
     private HttpServer httpServer;
     private Logger log;
-    public Server(int port, int backlog) {
-        this.port = port;
-        this.backlog = backlog;
 
-    }
-    public void create(){
+    public Server(int port, int backlog) {
+
         try {
             httpServer = HttpServer.create(new InetSocketAddress(port), backlog);
             log.log(Level.INFO, "Server created on port {0}", port);
         } catch (IOException e) {
             log.log(Level.SEVERE, e.getMessage());
         }
+
     }
 
     public void createContext(String path, HttpHandler handler) {
