@@ -11,13 +11,13 @@ import java.util.logging.Logger;
 
 public class Server {
     private HttpServer httpServer;
-    private Logger log;
+    private final Logger log = Logger.getLogger(this.getClass().getName());
 
     public Server(int port, int backlog) {
 
         try {
             httpServer = HttpServer.create(new InetSocketAddress(port), backlog);
-            log.log(Level.INFO, "Server created on port {0}", port);
+            log.log(Level.INFO, "Server started on port {0}", String.valueOf(port));
         } catch (IOException e) {
             log.log(Level.SEVERE, e.getMessage());
         }
