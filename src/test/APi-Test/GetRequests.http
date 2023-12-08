@@ -1,0 +1,6 @@
+GET http://localhost:8080/App
+Accept: application/json
+
+###
+GET http://localhost:8080/App/Calculate?a=1&b=2
+Accept: application/json
