@@ -1,7 +1,6 @@
-import de.bit.CalculateService;
-import de.bit.LinearCalculateService;
-import de.bit.VectorCalculateService;
-import org.junit.jupiter.api.BeforeAll;
+import de.bit.service.CalculateService;
+import de.bit.service.LinearCalculateService;
+import de.bit.service.VectorCalculateService;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
