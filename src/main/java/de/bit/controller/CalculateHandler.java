@@ -2,22 +2,18 @@ package de.bit.controller;
 
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
+import de.bit.Response;
 import de.bit.service.CalculatePresenter;
 import de.bit.service.CalculateService;
 
-import java.io.IOException;
-import java.io.OutputStream;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.Executor;
-import java.util.logging.Logger;
 
 public class CalculateHandler implements Controller {
     private static final String URL = "/Home/Calculate";
     private static final int RESPONSE_CODE = 200;
-    private final Logger log = Logger.getLogger(this.getClass().getName());
-
     private final CalculateService calculateService;
     private final CalculatePresenter calculatePresenter;
 
@@ -46,20 +42,14 @@ public class CalculateHandler implements Controller {
     class Handler implements HttpHandler {
 
         @Override
-        public void handle(HttpExchange httpExchange){
-            try {
-                String query = httpExchange.getRequestURI().getQuery();
-                Map<String, String> params = queryToMap(query);
-                int sum = calculateService.calculate(Integer.parseInt(params.get("a")), Integer.parseInt(params.get("b")));
-                String responseMessage = calculatePresenter.format(sum);
-                httpExchange.sendResponseHeaders(RESPONSE_CODE, responseMessage.length());
-                OutputStream outputStream = httpExchange.getResponseBody();
-                outputStream.write(responseMessage.getBytes());
-                outputStream.close();
+        public void handle(HttpExchange httpExchange) {
 
-            } catch (IOException e) {
-                log.severe("Error handling  GET /Calculate");
-            }
+            String query = httpExchange.getRequestURI().getQuery();
+            Map<String, String> params = queryToMap(query);
+            int sum = calculateService.calculate(Integer.parseInt(params.get("a")), Integer.parseInt(params.get("b")));
+            String responseMessage = calculatePresenter.format(sum);
+            Response response = new Response();
+            response.create(httpExchange, RESPONSE_CODE, responseMessage);
         }
 
         private Map<String, String> queryToMap(String query) {
