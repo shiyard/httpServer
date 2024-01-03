@@ -1,4 +1,4 @@
-package de.bit;
+package de.bit.service;
 
 public class CalculatePresenterImpl implements CalculatePresenter{
 

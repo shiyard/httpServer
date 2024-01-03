@@ -1,4 +1,4 @@
-package de.bit;
+package de.bit.controller;
 
 import com.sun.net.httpserver.HttpHandler;
 
