@@ -13,6 +13,12 @@ class HomeRequestHandler implements Controller {
     private static final int RESPONSE_CODE = 200;
     private final Logger log = Logger.getLogger(this.getClass().getName());
 
+    private final HomePresenter homePresenter;
+
+    HomeRequestHandler(HomePresenter homePresenter) {
+        this.homePresenter = homePresenter;
+    }
+
     @Override
     public HttpHandler getHandler() {
         return new Handler();
@@ -32,7 +38,7 @@ class HomeRequestHandler implements Controller {
         @Override
         public void handle(HttpExchange httpExchange) {
             try {
-                String responseMessage = "Response Message!";
+                String responseMessage = homePresenter.format();
                 httpExchange.sendResponseHeaders(RESPONSE_CODE, responseMessage.length());
                 OutputStream outputStream = httpExchange.getResponseBody();
                 outputStream.write(responseMessage.getBytes());

@@ -16,6 +16,14 @@ public class CalculateHandler implements Controller {
     private static final int RESPONSE_CODE = 200;
     private final Logger log = Logger.getLogger(this.getClass().getName());
 
+    private final CalculateService calculateService;
+    private final CalculatePresenter calculatePresenter;
+
+    public CalculateHandler(CalculateService calculateService, CalculatePresenter calculatePresenter) {
+        this.calculateService = calculateService;
+        this.calculatePresenter = calculatePresenter;
+    }
+
 
     @Override
     public HttpHandler getHandler() {
@@ -40,8 +48,8 @@ public class CalculateHandler implements Controller {
             try {
                 String query = httpExchange.getRequestURI().getQuery();
                 Map<String, String> params = queryToMap(query);
-                int sum = Integer.sum(Integer.parseInt(params.get("a")), Integer.parseInt(params.get("b")));
-                String responseMessage = "sum = " + sum;
+                int sum = calculateService.calculate(Integer.parseInt(params.get("a")), Integer.parseInt(params.get("b")));
+                String responseMessage = calculatePresenter.format(sum);
                 httpExchange.sendResponseHeaders(RESPONSE_CODE, responseMessage.length());
                 OutputStream outputStream = httpExchange.getResponseBody();
                 outputStream.write(responseMessage.getBytes());

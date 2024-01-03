@@ -16,7 +16,6 @@ public class Server {
 
     public Server(int port, int backlog, List<Controller> controllerList) {
 
-
         try {
             httpServer = HttpServer.create(new InetSocketAddress(port), backlog);
             for (Controller controller : controllerList) {
@@ -26,7 +25,6 @@ public class Server {
         } catch (IOException e) {
             log.log(Level.SEVERE, e.getMessage());
         }
-
     }
 
     public void createContext(String path, HttpHandler handler) {
