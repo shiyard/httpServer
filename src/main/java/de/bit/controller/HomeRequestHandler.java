@@ -3,7 +3,6 @@ package de.bit.controller;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 import de.bit.Response;
-import de.bit.service.HomePresenter;
 
 import java.util.concurrent.Executor;
 

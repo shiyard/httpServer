@@ -3,8 +3,8 @@ package de.bit;
 import de.bit.controller.CalculateHandler;
 import de.bit.controller.Controller;
 import de.bit.controller.HomeRequestHandler;
-import de.bit.service.CalculatePresenterImpl;
-import de.bit.service.HomePresenterImpl;
+import de.bit.controller.CalculatePresenterImpl;
+import de.bit.controller.HomePresenterImpl;
 import de.bit.service.VectorCalculateService;
 
 import java.util.ArrayList;
